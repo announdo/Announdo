@@ -15,9 +15,9 @@ void main() async{
       ),
       home: const loginApp12(),
       routes: {
-        '/TSS_school': (context) => thornhill_inf(),
-        '/teachersAuth': (context) => TeacherLoginAUth(),
-        '/changeAuthAnnouncement': (context) => ChangeDatabase(),
+        '/TSS_school': (context) => const thornhill_inf(),
+        '/teachersAuth': (context) => const TeacherLoginAUth(),
+        '/changeAuthAnnouncement': (context) => const ChangeDatabase(),
       }
     )
   );

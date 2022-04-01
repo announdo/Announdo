@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'global.dart' as gl;
@@ -12,135 +11,125 @@ class thornhill_inf extends StatefulWidget {
 }
 
 class _thornhill_infState extends State<thornhill_inf> {
-  List<bool> _isExpanded = List.generate(10, (_) => false);
+  final List<bool> _isExpanded = List.generate(10, (_) => false);
   List week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
   final _database = FirebaseDatabase.instance.ref();
 
   @override
   Widget build(BuildContext context) {
     _tittleMon() {
-    const _displayText = '';
-    _database.child('Monday/tittle').onValue.listen((event) {
-        final tittle = event.snapshot.value;
-        if (!mounted) return;
-        setState(() {
-          final _displayText = '$tittle';
-          gl.monTittle = _displayText;
+      _database.child('Monday/tittle').onValue.listen((event) {
+          final tittle = event.snapshot.value;
+          if (!mounted) return;
+          setState(() {
+            final _displayText = '$tittle';
+            gl.monTittle = _displayText;
+          });
         });
-      });
-      return gl.monTittle;
+        return gl.monTittle;
     }
     _descriptionMon() {
-    const _displayText = '';
-    _database.child('Monday/description').onValue.listen((event) {
-        final description = event.snapshot.value;
-        if (!mounted) return;
-        setState(() {
-          final _displayText = '$description';
-          gl.monDes = _displayText;
+      _database.child('Monday/description').onValue.listen((event) {
+          final description = event.snapshot.value;
+          if (!mounted) return;
+          setState(() {
+            final _displayText = '$description';
+            gl.monDes = _displayText;
+          });
         });
-      });
-      return gl.monDes;
+        return gl.monDes;
     }
     _tittleTue() {
-    const _displayText = '';
-    _database.child('Tuesday/tittle').onValue.listen((event) {
-        final tittle = event.snapshot.value;
-        if (!mounted) return;
-        setState(() {
-          final _displayText = '$tittle';
-          gl.tueTittle = _displayText;
+      _database.child('Tuesday/tittle').onValue.listen((event) {
+          final tittle = event.snapshot.value;
+          if (!mounted) return;
+          setState(() {
+            final _displayText = '$tittle';
+            gl.tueTittle = _displayText;
+          });
         });
-      });
-      return gl.tueTittle;
+        return gl.tueTittle;
     }
     _descriptionTue() {
-    const _displayText = '';
-    _database.child('Tuesday/description').onValue.listen((event) {
-        final description = event.snapshot.value;
-        if (!mounted) return;
-        setState(() {
-          final _displayText = '$description';
-          gl.tueDes = _displayText;
+      _database.child('Tuesday/description').onValue.listen((event) {
+          final description = event.snapshot.value;
+          if (!mounted) return;
+          setState(() {
+            final _displayText = '$description';
+            gl.tueDes = _displayText;
+          });
         });
-      });
-      return gl.tueDes;
+        return gl.tueDes;
     }
     _tittleWed() {
-    const _displayText = '';
-    _database.child('Wednesday/tittle').onValue.listen((event) {
-        final tittle = event.snapshot.value;
-        if (!mounted) return;
-        setState(() {
-          final _displayText = '$tittle';
-          gl.wenTittle = _displayText;
+      _database.child('Wednesday/tittle').onValue.listen((event) {
+          final tittle = event.snapshot.value;
+          if (!mounted) return;
+          setState(() {
+            final _displayText = '$tittle';
+            gl.wenTittle = _displayText;
+          });
         });
-      });
-      return gl.wenTittle;
+        return gl.wenTittle;
     }
     _descriptionWed() {
-    const _displayText = '';
-    _database.child('Wednesday/description').onValue.listen((event) {
-        final description = event.snapshot.value;
-        if (!mounted) return;
-        setState(() {
-          final _displayText = '$description';
-          gl.wenDes = _displayText;
+      _database.child('Wednesday/description').onValue.listen((event) {
+          final description = event.snapshot.value;
+          if (!mounted) return;
+          setState(() {
+            final _displayText = '$description';
+            gl.wenDes = _displayText;
+          });
         });
-      });
-      return gl.wenDes;
+        return gl.wenDes;
     }
     _tittleThur() {
-    const _displayText = '';
-    _database.child('Thursday/tittle').onValue.listen((event) {
-        final tittle = event.snapshot.value;
-        if (!mounted) return;
-        setState(() {
-          final _displayText = '$tittle';
-          gl.thurTittle = _displayText;
+      _database.child('Thursday/tittle').onValue.listen((event) {
+          final tittle = event.snapshot.value;
+          if (!mounted) return;
+          setState(() {
+            final _displayText = '$tittle';
+            gl.thurTittle = _displayText;
+          });
         });
-      });
-      return gl.thurTittle;
+        return gl.thurTittle;
     }
     _descriptionThur() {
-    const _displayText = '';
-    _database.child('Thursday/description').onValue.listen((event) {
-        final description = event.snapshot.value;
-        if (!mounted) return;
-        setState(() {
-          final _displayText = '$description';
-          gl.thurDes = _displayText;
+      _database.child('Thursday/description').onValue.listen((event) {
+          final description = event.snapshot.value;
+          if (!mounted) return;
+          setState(() {
+            final _displayText = '$description';
+            gl.thurDes = _displayText;
+          });
         });
-      });
-      return gl.thurDes;
+        return gl.thurDes;
     }
     _tittleFri() {
-    const _displayText = '';
-    _database.child('Friday/tittle').onValue.listen((event) {
-        final tittle = event.snapshot.value;
-        if (!mounted) return;
-        setState(() {
-          final _displayText = '$tittle';
-          gl.friTittle = _displayText;
+      _database.child('Friday/tittle').onValue.listen((event) {
+          final tittle = event.snapshot.value;
+          if (!mounted) return;
+          setState(() {
+            final _displayText = '$tittle';
+            gl.friTittle = _displayText;
+          });
         });
-      });
-      return gl.friTittle;
+        return gl.friTittle;
     }
     _descriptionFri() {
-    const _displayText = '';
-    _database.child('Thursday/description').onValue.listen((event) {
-        final description = event.snapshot.value;
-        if (!mounted) return;
-        setState(() {
-          final _displayText = '$description';
-          gl.friDes = _displayText;
+      _database.child('Thursday/description').onValue.listen((event) {
+          final description = event.snapshot.value;
+          if (!mounted) return;
+          setState(() {
+            final _displayText = '$description';
+            gl.friDes = _displayText;
+          });
         });
-      });
-      return gl.friDes;
+        return gl.friDes;
     }
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: const Text("Thornhill School"),
       ),
@@ -229,7 +218,7 @@ class _thornhill_infState extends State<thornhill_inf> {
               TextButton(
                 style: TextButton.styleFrom(
                   primary: Colors.blue,
-                  padding: EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(10.0),
                 ),
                 child: const Align(
                   alignment: Alignment.bottomCenter,
@@ -242,6 +231,6 @@ class _thornhill_infState extends State<thornhill_inf> {
           ),
         ),
       )
-      );
+    );
   }
 }

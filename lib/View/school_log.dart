@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,13 +11,8 @@ class loginApp12 extends StatefulWidget {
 class _loginApp12State extends State<loginApp12> {
   String dropdownvalue = 'School';
   String stats = 'None'; 
+  var items = ['Thornhill Secondary School', 'Your school is not available yet', 'School'];
   
-  // List of items in our dropdown menu
-  var items = [    
-    'Thornhill Secondary School',
-    'Your school is not available yet',
-    'School',
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
