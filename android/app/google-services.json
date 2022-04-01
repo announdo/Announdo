@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "478607183864",
+    "firebase_url": "https://announdo-9090-default-rtdb.firebaseio.com",
+    "project_id": "announdo-9090",
+    "storage_bucket": "announdo-9090.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478607183864:android:280e1091fdd3e53fe1d00d",
+        "android_client_info": {
+          "package_name": "com.announdo.announdo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478607183864-ikha838qc2ufblf8nffr1shvc0a9s5jo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPzsCTD9QKIfH9rXnDpYGs7luxqMXnTts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "478607183864-ikha838qc2ufblf8nffr1shvc0a9s5jo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "478607183864-bsld8fc4fdq1bbtinj4bdu8rmonoh47t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.announdo.announdo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
