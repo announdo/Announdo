@@ -4,8 +4,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
-
 class loginApp12 extends StatefulWidget {
   const loginApp12({ Key? key }) : super(key: key);
 
@@ -18,7 +16,7 @@ class _loginApp12State extends State<loginApp12> {
     ConnectivityResult? _connectivityResult;
     late StreamSubscription _connectivitySubscription;
     bool _isConnectionSuccessful = false;
-    
+
     @override
     initState() {
       super.initState();
@@ -65,16 +63,23 @@ class _loginApp12State extends State<loginApp12> {
   Widget build(BuildContext context) {
     _tryConnection();
     return Scaffold(
+      backgroundColor: Color.fromRGBO(8, 65, 92, 1),
       appBar: AppBar(
-        title: const Text("Login"),
+        centerTitle: true,
+        backgroundColor: Color.fromRGBO(235, 186, 185, 1),
+        title: const Text("Login", style: TextStyle(fontFamily: 'Lato')),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(_errorMessage),
-            const Text('Choose your school:',),
+            Text(_errorMessage, style: TextStyle(color: Colors.red, fontSize: 20.0, fontFamily: 'Lato-bold'), textAlign: TextAlign.center,),
+            SizedBox(height: 20),
+            const Text('Choose your school:', style: TextStyle(fontFamily: 'Lato-bold', fontSize: 25.0, color: Colors.white), textAlign: TextAlign.center,),
+            SizedBox(height: 20),
             DropdownButton(
+              style: TextStyle(fontFamily: 'Lato-bold', fontSize: 20.0, color: Colors.white),
+              dropdownColor: Color.fromRGBO(56, 134, 151, 1),
               value: dropdownvalue,
               icon: const Icon(Icons.keyboard_arrow_down),    
               items: items.map((String items) {
@@ -89,24 +94,24 @@ class _loginApp12State extends State<loginApp12> {
                 });
               },
             ),
+            SizedBox(height: 20),
             TextButton(
-              child: const Text('Login'),
+              child: const Text('Enter', style: TextStyle(fontFamily: 'Lato-bold', fontSize: 22.0, color: Colors.white)),
               onPressed: () {
-                Text('Is connection success: $_isConnectionSuccessful');
                 if (_isConnectionSuccessful == true) {
                   _errorMessage = '';
                   if (dropdownvalue == 'Thornhill Secondary School'){
-                  print("YES");
-                  Navigator.of(context).pushReplacementNamed('/TSS_school');
+                    Navigator.of(context).pushReplacementNamed('/TSS_school');
                 } else{
                   _errorMessage = 'School not available yet';
-                };
+                }
                 } else {
                   _errorMessage = 'No internet connection';
                   _tryConnection();
                 }
               },
             ),
+            SizedBox(height: 20),
           ],
         ),
       ),
