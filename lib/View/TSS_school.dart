@@ -16,24 +16,6 @@ class _thornhill_infState extends State<thornhill_inf> {
   List week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
   final _database = FirebaseDatabase.instance.ref();
 
-  ConnectivityResult? _connectivityResult;
- 
-  Future<void> _checkConnectivityState() async {
-    final ConnectivityResult result = await Connectivity().checkConnectivity();
- 
-    if (result == ConnectivityResult.wifi) {
-      print('Connected to a Wi-Fi network');
-    } else if (result == ConnectivityResult.mobile) {
-      print('Connected to a mobile network');
-    } else {
-      print('Not connected to any network');
-    }
- 
-    setState(() {
-      _connectivityResult = result;
-    });
-  }
-
   _tittleMon() {
       _database.child('Monday/tittle').onValue.listen((event) {
           final tittle = event.snapshot.value;
@@ -146,10 +128,7 @@ class _thornhill_infState extends State<thornhill_inf> {
     }
     
   @override
-  Widget build(BuildContext context) {
-    _checkConnectivityState();
-    
-
+  Widget build(BuildContext context) {    
     return RefreshIndicator(
       onRefresh: () async {
         await Future.delayed(Duration(seconds: 1));
