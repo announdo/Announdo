@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'global.dart' as gl;
 import '../firebase_options.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+
 
 class TeacherLoginAUth extends StatefulWidget {
   const TeacherLoginAUth({ Key? key }) : super(key: key);
@@ -15,6 +19,9 @@ class TeacherLoginAUth extends StatefulWidget {
 class _TeacherLoginAUthState extends State<TeacherLoginAUth> {
   late final TextEditingController _email;
   late final TextEditingController _password;
+  String _errorMessage = '';
+  bool _validate = false;
+  bool _ps = false;
 
   @override
   void initState() {
@@ -38,8 +45,12 @@ class _TeacherLoginAUthState extends State<TeacherLoginAUth> {
     'Your school is not available yet',
     'School',
   ];
+
+
+
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
@@ -64,8 +75,9 @@ class _TeacherLoginAUthState extends State<TeacherLoginAUth> {
                     keyboardType: TextInputType.emailAddress,
                     enableSuggestions: false,
                     autocorrect: false,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Email',
+                      errorText: _validate ? _errorMessage : null,
                     ),
                   ),
                   TextField(
@@ -73,8 +85,9 @@ class _TeacherLoginAUthState extends State<TeacherLoginAUth> {
                     obscureText: true,
                     enableSuggestions: false,
                     autocorrect: false,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Password',
+                      errorText: _validate ? _errorMessage : null,
                     ),
                   ),
                   const Text('Choose your school:',),
@@ -96,6 +109,10 @@ class _TeacherLoginAUthState extends State<TeacherLoginAUth> {
                   ),
                   TextButton(
                     onPressed: () async {
+                      setState(() {
+                      _email.text.isEmpty ? _validate = true : _validate = false;
+                      _password.text.isEmpty ? _validate = true : _validate = false;
+                    });
                       final email = _email.text;
                       final password = _password.text;
                       if (dropdownvalue == "Thornhill Secondary School"){
@@ -105,20 +122,50 @@ class _TeacherLoginAUthState extends State<TeacherLoginAUth> {
                           email: email,
                           password: password,
                           );
-                          print(userCredential);
                           Navigator.of(context).pushNamedAndRemoveUntil('/changeAuthAnnouncement', (route) => false);
-
+                          _validate = false;
                         } on FirebaseAuthException catch (e) {
-                          if (e.code == 'user-not-found') {
-                            print('User not found');
+                          print(e.code);
+                          if (e.code == 'user-not-found' || e.code == 'invalid-email') {
+                            print("User not found");
+                            setState(() {
+                              _errorMessage = 'Invalid email or password';
+                              _validate = true;
+                            });
                           } else if (e.code == 'wrong-password') {
-                            print('Wrong password');
-                          }
+                            print("Wrong pass");
+                            setState(() {
+                              _validate = true;
+                              _errorMessage = 'Wrong password';
+                            });
+                          } else if (e.code == "unknown") {
+                            print("Unknown error");
+                            setState(() {
+                              _validate = true;
+                              _errorMessage = 'Email or password cannot be empty';
+                            });
+                          } else if (e.code == "too-many-requests") {
+                            print("too-many-requests");
+                            setState(() {
+                              _validate = true;
+                              _errorMessage = 'Too many requests have been made please try again later';
+                            });
+                          } else if (e.code == "network-request-failed") {
+                            print('network-request-failed');
+                            setState(() {
+                              _validate = true;
+                              _errorMessage = 'Network request failed please try again later';
+                            });
+                          } 
                         }
                       } else {
                         print("Not a valid school");
+                        setState(() {
+                          _validate = true;
+                          _errorMessage = 'Not a valid school';
+                        });
                       }
-                      }, 
+                      },
                       child: const Text('Enter')
                       ),
               ],

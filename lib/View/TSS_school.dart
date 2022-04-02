@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'global.dart' as gl;
@@ -15,9 +16,25 @@ class _thornhill_infState extends State<thornhill_inf> {
   List week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
   final _database = FirebaseDatabase.instance.ref();
 
-  @override
-  Widget build(BuildContext context) {
-    _tittleMon() {
+  ConnectivityResult? _connectivityResult;
+ 
+  Future<void> _checkConnectivityState() async {
+    final ConnectivityResult result = await Connectivity().checkConnectivity();
+ 
+    if (result == ConnectivityResult.wifi) {
+      print('Connected to a Wi-Fi network');
+    } else if (result == ConnectivityResult.mobile) {
+      print('Connected to a mobile network');
+    } else {
+      print('Not connected to any network');
+    }
+ 
+    setState(() {
+      _connectivityResult = result;
+    });
+  }
+
+  _tittleMon() {
       _database.child('Monday/tittle').onValue.listen((event) {
           final tittle = event.snapshot.value;
           if (!mounted) return;
@@ -127,110 +144,120 @@ class _thornhill_infState extends State<thornhill_inf> {
         });
         return gl.friDes;
     }
+    
+  @override
+  Widget build(BuildContext context) {
+    _checkConnectivityState();
+    
 
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        title: const Text("Thornhill School"),
-      ),
-        body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(32.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('Announcements:',),
-              ExpansionPanelList(
-                expansionCallback: (int index, bool isExpanded) {
-                  if (!mounted) return;
-                  setState(() {
-                    _isExpanded[index] = !isExpanded;
-                  });
-                },
-                children: [
-                  ExpansionPanel(
-                    headerBuilder: (BuildContext context, bool isExpanded) {
-                      return ListTile(
-                        title: Text(week[0]),
-                      );
-                    },
-                    body: ListTile(
-                        title: Text(_tittleMon()),
-                        subtitle: Text(_descriptionMon()),
-                    ),
-                    isExpanded: _isExpanded[0],
-                    canTapOnHeader: true,
-                  ),
-                  ExpansionPanel(
-                    headerBuilder: (BuildContext context, bool isExpanded) {
-                      return ListTile(
-                        title: Text(week[1]),
-                      );
-                    },
-                    body: ListTile(
-                      title: Text(_tittleTue()),
-                      subtitle: Text(_descriptionTue()),
-                    ),
-                    isExpanded: _isExpanded[1],
-                    canTapOnHeader: true,
-                  ),
-                  ExpansionPanel(
-                    headerBuilder: (BuildContext context, bool isExpanded) {
-                      return ListTile(
-                        title: Text(week[2]),
-                      );
-                    },
-                    body: ListTile(
-                      title: Text(_tittleWed()),
-                      subtitle: Text(_descriptionWed()),
-                    ),
-                    isExpanded: _isExpanded[2],
-                    canTapOnHeader: true,
-                  ),
-                  ExpansionPanel(
-                    headerBuilder: (BuildContext context, bool isExpanded) {
-                      return ListTile(
-                        title: Text(week[3]),
-                      );
-                    },
-                    body: ListTile(
-                      title: Text(_tittleThur()),
-                      subtitle: Text(_descriptionThur())
-                    ),
-                    isExpanded: _isExpanded[3],
-                    canTapOnHeader: true,
-                  ),
-                  ExpansionPanel(
-                    headerBuilder: (BuildContext context, bool isExpanded) {
-                      return ListTile(
-                        title: Text(week[4]),
-                      );
-                    },
-                    body: ListTile(
-                      title: Text(_tittleFri()),
-                      subtitle: Text(_descriptionFri())
-                    ),
-                    isExpanded: _isExpanded[4],
-                    canTapOnHeader: true,
-                  ),
-                ],
-              ),
-              TextButton(
-                style: TextButton.styleFrom(
-                  primary: Colors.blue,
-                  padding: const EdgeInsets.all(10.0),
-                ),
-                child: const Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Text("Are you a teacher?")),
-                onPressed: () {
-                  Navigator.of(context).pushNamedAndRemoveUntil('/teachersAuth', (route) => false);
-                },
-              ),
-            ],
-          ),
+    return RefreshIndicator(
+      onRefresh: () async {
+        await Future.delayed(Duration(seconds: 1));
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        appBar: AppBar(
+          title: const Text("Thornhill School"),
         ),
-      )
+          body: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(32.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Announcements:',),
+                ExpansionPanelList(
+                  expansionCallback: (int index, bool isExpanded) {
+                    if (!mounted) return;
+                    setState(() {
+                      _isExpanded[index] = !isExpanded;
+                    });
+                  },
+                  children: [
+                    ExpansionPanel(
+                      headerBuilder: (BuildContext context, bool isExpanded) {
+                        return ListTile(
+                          title: Text(week[0]),
+                        );
+                      },
+                      body: ListTile(
+                          title: Text(_tittleMon()),
+                          subtitle: Text(_descriptionMon()),
+                      ),
+                      isExpanded: _isExpanded[0],
+                      canTapOnHeader: true,
+                    ),
+                    ExpansionPanel(
+                      headerBuilder: (BuildContext context, bool isExpanded) {
+                        return ListTile(
+                          title: Text(week[1]),
+                        );
+                      },
+                      body: ListTile(
+                        title: Text(_tittleTue()),
+                        subtitle: Text(_descriptionTue()),
+                      ),
+                      isExpanded: _isExpanded[1],
+                      canTapOnHeader: true,
+                    ),
+                    ExpansionPanel(
+                      headerBuilder: (BuildContext context, bool isExpanded) {
+                        return ListTile(
+                          title: Text(week[2]),
+                        );
+                      },
+                      body: ListTile(
+                        title: Text(_tittleWed()),
+                        subtitle: Text(_descriptionWed()),
+                      ),
+                      isExpanded: _isExpanded[2],
+                      canTapOnHeader: true,
+                    ),
+                    ExpansionPanel(
+                      headerBuilder: (BuildContext context, bool isExpanded) {
+                        return ListTile(
+                          title: Text(week[3]),
+                        );
+                      },
+                      body: ListTile(
+                        title: Text(_tittleThur()),
+                        subtitle: Text(_descriptionThur())
+                      ),
+                      isExpanded: _isExpanded[3],
+                      canTapOnHeader: true,
+                    ),
+                    ExpansionPanel(
+                      headerBuilder: (BuildContext context, bool isExpanded) {
+                        return ListTile(
+                          title: Text(week[4]),
+                        );
+                      },
+                      body: ListTile(
+                        title: Text(_tittleFri()),
+                        subtitle: Text(_descriptionFri())
+                      ),
+                      isExpanded: _isExpanded[4],
+                      canTapOnHeader: true,
+                    ),
+                  ],
+                ),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    primary: Colors.blue,
+                    padding: const EdgeInsets.all(10.0),
+                  ),
+                  child: const Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Text("Are you a teacher?")),
+                  onPressed: () {
+                    Navigator.of(context).pushNamedAndRemoveUntil('/teachersAuth', (route) => false);
+                  },
+                ),
+              ],
+            ),
+          ),
+        )
+      ),
     );
   }
 }
