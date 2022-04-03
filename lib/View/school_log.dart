@@ -67,7 +67,7 @@ class _loginApp12State extends State<loginApp12> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Color.fromRGBO(235, 186, 185, 1),
-        title: const Text("Login", style: TextStyle(fontFamily: 'Lato')),
+        title: const Text("Login", style: TextStyle(fontFamily: 'Lato-bold')),
       ),
       body: Center(
         child: Column(

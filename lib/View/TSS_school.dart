@@ -131,12 +131,15 @@ class _thornhill_infState extends State<thornhill_inf> {
   Widget build(BuildContext context) {    
     return RefreshIndicator(
       onRefresh: () async {
-        await Future.delayed(Duration(seconds: 1));
+        await Future.delayed(Duration(seconds: 2));
       },
       child: Scaffold(
+        backgroundColor: Color.fromRGBO(235, 186, 185, 1),
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
-          title: const Text("Thornhill School"),
+          centerTitle: true,
+          backgroundColor: Color.fromRGBO(8, 65, 92, 1),
+          title: const Text("Thornhill School", style: TextStyle(fontSize: 20, fontFamily: 'Lato-bold'),),
         ),
           body: Center(
           child: SingleChildScrollView(
@@ -144,92 +147,168 @@ class _thornhill_infState extends State<thornhill_inf> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Announcements:',),
-                ExpansionPanelList(
-                  expansionCallback: (int index, bool isExpanded) {
-                    if (!mounted) return;
-                    setState(() {
-                      _isExpanded[index] = !isExpanded;
-                    });
-                  },
-                  children: [
-                    ExpansionPanel(
-                      headerBuilder: (BuildContext context, bool isExpanded) {
-                        return ListTile(
-                          title: Text(week[0]),
-                        );
-                      },
-                      body: ListTile(
-                          title: Text(_tittleMon()),
-                          subtitle: Text(_descriptionMon()),
+                const Text('Announcements:', style: TextStyle(fontSize: 25, fontFamily: 'Lato-bold')),
+                SizedBox(height: 30),
+                ExpansionTile(
+                  backgroundColor: Color.fromRGBO(33, 137, 126, 1),
+                  textColor: Color.fromRGBO(255, 255, 255, 1),
+                  iconColor: Color.fromRGBO(255, 255, 255, 1),
+                  title: const Text('Monday', style: TextStyle(fontSize: 25, fontFamily: 'Lato-bold')),
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        children: [
+                          Text(_tittleMon(), style: TextStyle(fontSize: 22, fontFamily: 'Lato-bold', color: Color.fromRGBO(255, 255, 255, 1)),  textAlign: TextAlign.center),
+                          SizedBox(height: 15),
+                          Text(_descriptionMon(), style: TextStyle(fontSize: 15, fontFamily: 'Lato', color: Color.fromRGBO(255, 255, 255, 1)), textAlign: TextAlign.center),
+                          SizedBox(height: 15),
+                        ],
                       ),
-                      isExpanded: _isExpanded[0],
-                      canTapOnHeader: true,
-                    ),
-                    ExpansionPanel(
-                      headerBuilder: (BuildContext context, bool isExpanded) {
-                        return ListTile(
-                          title: Text(week[1]),
-                        );
-                      },
-                      body: ListTile(
-                        title: Text(_tittleTue()),
-                        subtitle: Text(_descriptionTue()),
-                      ),
-                      isExpanded: _isExpanded[1],
-                      canTapOnHeader: true,
-                    ),
-                    ExpansionPanel(
-                      headerBuilder: (BuildContext context, bool isExpanded) {
-                        return ListTile(
-                          title: Text(week[2]),
-                        );
-                      },
-                      body: ListTile(
-                        title: Text(_tittleWed()),
-                        subtitle: Text(_descriptionWed()),
-                      ),
-                      isExpanded: _isExpanded[2],
-                      canTapOnHeader: true,
-                    ),
-                    ExpansionPanel(
-                      headerBuilder: (BuildContext context, bool isExpanded) {
-                        return ListTile(
-                          title: Text(week[3]),
-                        );
-                      },
-                      body: ListTile(
-                        title: Text(_tittleThur()),
-                        subtitle: Text(_descriptionThur())
-                      ),
-                      isExpanded: _isExpanded[3],
-                      canTapOnHeader: true,
-                    ),
-                    ExpansionPanel(
-                      headerBuilder: (BuildContext context, bool isExpanded) {
-                        return ListTile(
-                          title: Text(week[4]),
-                        );
-                      },
-                      body: ListTile(
-                        title: Text(_tittleFri()),
-                        subtitle: Text(_descriptionFri())
-                      ),
-                      isExpanded: _isExpanded[4],
-                      canTapOnHeader: true,
                     ),
                   ],
+                  leading: Icon(Icons.calendar_today, color: Colors.black, size: 30),
+                  trailing: Icon(Icons.keyboard_arrow_down, color: Colors.black, size: 30),
+                  onExpansionChanged: (value) {
+                    setState(() {
+                      _isExpanded[0] = value;
+                    });
+                  },
+                  initiallyExpanded: _isExpanded[0],
                 ),
+                SizedBox(height: 30),
+                ExpansionTile(
+                  backgroundColor: Color.fromRGBO(33, 137, 126, 1),
+                  textColor: Color.fromRGBO(255, 255, 255, 1),
+                  iconColor: Color.fromRGBO(255, 255, 255, 1),
+                  title: const Text('Tuesday', style: TextStyle(fontSize: 25, fontFamily: 'Lato-bold')),
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        children: [
+                          Text(_tittleTue(), style: TextStyle(fontSize: 22, fontFamily: 'Lato-bold', color: Color.fromRGBO(255, 255, 255, 1)),  textAlign: TextAlign.center),
+                          SizedBox(height: 15),
+                          Text(_descriptionTue(), style: TextStyle(fontSize: 15, fontFamily: 'Lato', color: Color.fromRGBO(255, 255, 255, 1)), textAlign: TextAlign.center),
+                          SizedBox(height: 15),
+                        ],
+                      ),
+                    ),
+                  ],
+                  leading: Icon(Icons.calendar_today, color: Colors.black, size: 30),
+                  trailing: Icon(Icons.keyboard_arrow_down, color: Colors.black, size: 30),
+                  onExpansionChanged: (value) {
+                    setState(() {
+                      _isExpanded[1] = value;
+                    });
+                  },
+                  initiallyExpanded: _isExpanded[1],
+                ),
+                SizedBox(height: 30),
+                ExpansionTile(
+                  backgroundColor: Color.fromRGBO(33, 137, 126, 1),
+                  textColor: Color.fromRGBO(255, 255, 255, 1),
+                  iconColor: Color.fromRGBO(255, 255, 255, 1),
+                  title: const Text('Wednesday', style: TextStyle(fontSize: 25, fontFamily: 'Lato-bold')),
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        children: [
+                          Text(_tittleWed(), style: TextStyle(fontSize: 22, fontFamily: 'Lato-bold', color: Color.fromRGBO(255, 255, 255, 1)),  textAlign: TextAlign.center),
+                          SizedBox(height: 15),
+                          Text(_descriptionWed(), style: TextStyle(fontSize: 15, fontFamily: 'Lato', color: Color.fromRGBO(255, 255, 255, 1)), textAlign: TextAlign.center),
+                          SizedBox(height: 15),
+                        ],
+                      ),
+                    ),
+                  ],
+                  leading: Icon(Icons.calendar_today, color: Colors.black, size: 30),
+                  trailing: Icon(Icons.keyboard_arrow_down, color: Colors.black, size: 30),
+                  onExpansionChanged: (value) {
+                    setState(() {
+                      _isExpanded[2] = value;
+                    });
+                  },
+                  initiallyExpanded: _isExpanded[2],
+                ),
+                SizedBox(height: 30),
+                ExpansionTile(
+                  backgroundColor: Color.fromRGBO(33, 137, 126, 1),
+                  textColor: Color.fromRGBO(255, 255, 255, 1),
+                  iconColor: Color.fromRGBO(255, 255, 255, 1),
+                  title: const Text('Thursday', style: TextStyle(fontSize: 25, fontFamily: 'Lato-bold')),
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        children: [
+                          Text(_tittleThur(), style: TextStyle(fontSize: 22, fontFamily: 'Lato-bold', color: Color.fromRGBO(255, 255, 255, 1)),  textAlign: TextAlign.center),
+                          SizedBox(height: 15),
+                          Text(_descriptionThur(), style: TextStyle(fontSize: 15, fontFamily: 'Lato', color: Color.fromRGBO(255, 255, 255, 1)), textAlign: TextAlign.center),
+                          SizedBox(height: 15),
+                        ],
+                      ),
+                    ),
+                  ],
+                  leading: Icon(Icons.calendar_today, color: Colors.black, size: 30),
+                  trailing: Icon(Icons.keyboard_arrow_down, color: Colors.black, size: 30),
+                  onExpansionChanged: (value) {
+                    setState(() {
+                      _isExpanded[3] = value;
+                    });
+                  },
+                  initiallyExpanded: _isExpanded[3],
+                ),
+                SizedBox(height: 30),
+                ExpansionTile(
+                  backgroundColor: Color.fromRGBO(33, 137, 126, 1),
+                  textColor: Color.fromRGBO(255, 255, 255, 1),
+                  iconColor: Color.fromRGBO(255, 255, 255, 1),
+                  title: const Text('Friday', style: TextStyle(fontSize: 25, fontFamily: 'Lato-bold')),
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        children: [
+                          Text(_tittleFri(), style: TextStyle(fontSize: 22, fontFamily: 'Lato-bold', color: Color.fromRGBO(255, 255, 255, 1)),  textAlign: TextAlign.center),
+                          SizedBox(height: 15),
+                          Text(_descriptionFri(), style: TextStyle(fontSize: 15, fontFamily: 'Lato', color: Color.fromRGBO(255, 255, 255, 1)), textAlign: TextAlign.center),
+                          SizedBox(height: 15),
+                        ],
+                      ),
+                    ),
+                  ],
+                  leading: Icon(Icons.calendar_today, color: Colors.black, size: 30),
+                  trailing: Icon(Icons.keyboard_arrow_down, color: Colors.black, size: 30),
+                  onExpansionChanged: (value) {
+                    setState(() {
+                      _isExpanded[4] = value;
+                    });
+                  },
+                  initiallyExpanded: _isExpanded[4],
+                ),
+                SizedBox(height: 30),
                 TextButton(
                   style: TextButton.styleFrom(
-                    primary: Colors.blue,
+                    primary: Colors.white,
+                    onSurface: Colors.white,
+                    shadowColor: Colors.black,
+                    backgroundColor: Colors.black,
                     padding: const EdgeInsets.all(10.0),
+                    maximumSize: const Size.fromWidth(200.0),
+                    animationDuration: const Duration(milliseconds: 100),
+                    elevation: 40,
                   ),
+                  onHover: (hover) {
+                      backgroundColor: Color.fromRGBO(105, 209, 197, 1);
+                      
+                  },
                   child: const Align(
                     alignment: Alignment.bottomCenter,
-                    child: Text("Are you a teacher?")),
-                  onPressed: () {
-                    Navigator.of(context).pushNamedAndRemoveUntil('/teachersAuth', (route) => false);
+                    child: Text("Are you a teacher?", style: TextStyle(fontSize: 15, fontFamily: 'Lato-bold'))),
+                    onPressed: () {
+                      Navigator.of(context).pushNamedAndRemoveUntil('/teachersAuth', (route) => false);
                   },
                 ),
               ],

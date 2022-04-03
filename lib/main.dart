@@ -18,7 +18,7 @@ void main() async{
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: loginApp12(),
+      home: thornhill_inf(),
       routes: {
         '/school_log': (context) => const loginApp12(),
         '/TSS_school': (context) => const thornhill_inf(),

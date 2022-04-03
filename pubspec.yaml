@@ -51,6 +51,7 @@ flutter_native_splash:
   android_gravity: fill
   ios_content_mode: scaleAspectFill
   fullscreen: true
+  duration: 5000
 
 
 dev_dependencies:
