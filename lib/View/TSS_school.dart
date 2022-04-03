@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'global.dart' as gl;
@@ -303,7 +304,13 @@ class _thornhill_infState extends State<thornhill_inf> {
                     alignment: Alignment.bottomCenter,
                     child: Text("Are you a teacher?", style: TextStyle(fontSize: 15, fontFamily: 'Lato-bold'))),
                     onPressed: () {
-                      Navigator.of(context).pushNamedAndRemoveUntil('/teachersAuth', (route) => false);
+                      final user = FirebaseAuth.instance.currentUser;
+                      if (user != null) {
+                        Navigator.of(context).pushNamedAndRemoveUntil('/changeAuthAnnouncement', (route) => false);
+                      } else {
+                        Navigator.of(context).pushNamedAndRemoveUntil('/teachersAuth', (route) => false);
+                      }
+                      
                   },
                 ),
               ],
