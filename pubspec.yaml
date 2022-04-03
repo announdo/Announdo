@@ -41,7 +41,15 @@ dependencies:
   firebase_database: ^9.0.8
   connectivity_plus: ^2.2.1
   flutter_native_splash: ^2.1.2+1
+  flutter_launcher_icons: ^0.9.2
 
+flutter_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "#08415c"
+  adaptive_icon_foreground: "assets/icon/icon_foreground.png"
 
 flutter_native_splash:
   color: "#ffffff"
