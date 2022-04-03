@@ -8,7 +8,6 @@ import 'View/teacher_Login.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
   await Firebase.initializeApp();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -18,7 +17,7 @@ void main() async{
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: thornhill_inf(),
+      home: const loginApp12(),
       routes: {
         '/school_log': (context) => const loginApp12(),
         '/TSS_school': (context) => const thornhill_inf(),

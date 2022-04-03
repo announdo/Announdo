@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TeacherLoginAUth extends StatefulWidget {
@@ -17,8 +16,6 @@ class _TeacherLoginAUthState extends State<TeacherLoginAUth> {
   late final TextEditingController _password;
   String _errorMessage = '';
   bool _validate = false;
-  bool _ps = false;
-  String er = "";
   ConnectivityResult? _connectivityResult;
   late StreamSubscription _connectivitySubscription;
   bool _isConnectionSuccessful = false;
@@ -76,12 +73,13 @@ class _TeacherLoginAUthState extends State<TeacherLoginAUth> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: const Text("Teacher login"),
+        backgroundColor: const Color.fromRGBO(8, 65, 92, 1),
+        title: const Text("Teacher login", style: TextStyle(fontSize: 20, fontFamily: 'Lato-bold'),),
         leading: BackButton(
           onPressed: () {
             Navigator.of(context).pushNamedAndRemoveUntil('/TSS_school', (route) => false);
           },
-          color: Colors.black,
+          color: Colors.white,
         ),
       ),
       body: Center(
@@ -90,31 +88,62 @@ class _TeacherLoginAUthState extends State<TeacherLoginAUth> {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(er),
-                const Text('Login to change the Announcement:'),
-                const Text('YOU NEED TO BE A AUTHORIZED TEACHER TO CHANGE INFO!'),
+                const SizedBox(height: 30),
+                const Text('Login to change the Announcement:', style: TextStyle(fontSize: 25, fontFamily: 'Lato-bold'), textAlign: TextAlign.center,),
+                const SizedBox(height: 20),
+                const Text('YOU NEED TO BE A AUTHORIZED TEACHER TO CHANGE INFO!', style: TextStyle(fontSize: 15, fontFamily: 'Lato-bold'), textAlign: TextAlign.center,),
+                const SizedBox(height: 20),
                   TextField(
                     controller: _email,
+                    cursorColor: const Color.fromRGBO(8, 65, 92, 1),
                     keyboardType: TextInputType.emailAddress,
                     enableSuggestions: false,
                     autocorrect: false,
+                    scrollPadding: const EdgeInsets.all(10.0),
+                    maxLines: 1,
+                    enabled: true,
+                    scrollPhysics: const BouncingScrollPhysics(),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontFamily: 'Lato',
+                      color: const Color.fromRGBO(8, 65, 92, 1),
+                    ),
                     decoration: InputDecoration(
                       labelText: 'Email',
                       errorText: _validate ? _errorMessage : null,
                     ),
                   ),
                   TextField(
+                    cursorColor: const Color.fromRGBO(8, 65, 92, 1),
                     controller: _password,
                     obscureText: true,
+                    scrollPadding: const EdgeInsets.all(10.0),
                     enableSuggestions: false,
+                    maxLines: 1,
+                    enabled: true,
+                    scrollPhysics: const BouncingScrollPhysics(),
                     autocorrect: false,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontFamily: 'Lato',
+                      color: const Color.fromRGBO(8, 65, 92, 1),
+                    ),
                     decoration: InputDecoration(
                       labelText: 'Password',
                       errorText: _validate ? _errorMessage : null,
                     ),
                   ),
-                  const Text('Choose your school:',),
+                  const SizedBox(height: 30),
+                  const Text('Choose your school:', style: TextStyle(fontSize: 22, fontFamily: 'Lato-bold'), textAlign: TextAlign.center,),
+                  const SizedBox(height: 20),
                   DropdownButton(
+                    elevation: 15,
+                    iconDisabledColor: Colors.black,
+                    iconSize: 30,
+                    dropdownColor: Colors.pink[100],
+                    borderRadius: BorderRadius.circular(10),
+                    iconEnabledColor: const Color.fromRGBO(204, 41, 54, 1),
+                    style: const TextStyle(fontSize: 17, fontFamily: 'Lato-bold', color: Colors.black),
                     value: dropdownvalue,
                     icon: const Icon(Icons.keyboard_arrow_down),    
                     items: items.map((String items) {
@@ -130,10 +159,20 @@ class _TeacherLoginAUthState extends State<TeacherLoginAUth> {
                       });
                     },
                   ),
+                  const SizedBox(height: 30),
                   TextButton(
+                    style: TextButton.styleFrom(
+                      primary: Colors.white,
+                      onSurface: Colors.white,
+                      shadowColor: Colors.black,
+                      backgroundColor: Color.fromARGB(250, 8, 65, 92),
+                      padding: const EdgeInsets.all(10.0),
+                      maximumSize: const Size.fromWidth(200.0),
+                      animationDuration: const Duration(milliseconds: 100),
+                      elevation: 40,
+                    ),
                     onPressed: () async {
                       if (_isConnectionSuccessful == true) {
-                        er = "";
                         setState(() {
                         _email.text.isEmpty ? _validate = true : _validate = false;
                         _password.text.isEmpty ? _validate = true : _validate = false;
@@ -142,7 +181,6 @@ class _TeacherLoginAUthState extends State<TeacherLoginAUth> {
                         final password = _password.text;
                         if (dropdownvalue == "Thornhill Secondary School"){
                           try {
-                            final userCredential = 
                             await FirebaseAuth.instance.signInWithEmailAndPassword(
                             email: email,
                             password: password,
@@ -150,33 +188,27 @@ class _TeacherLoginAUthState extends State<TeacherLoginAUth> {
                             Navigator.of(context).pushNamedAndRemoveUntil('/changeAuthAnnouncement', (route) => false);
                             _validate = false;
                           } on FirebaseAuthException catch (e) {
-                            print(e.code);
                             if (e.code == 'user-not-found' || e.code == 'invalid-email') {
-                              print("User not found");
                               setState(() {
                                 _errorMessage = 'Invalid email or password';
                                 _validate = true;
                               });
                             } else if (e.code == 'wrong-password') {
-                              print("Wrong pass");
                               setState(() {
                                 _validate = true;
                                 _errorMessage = 'Wrong password';
                               });
                             } else if (e.code == "unknown") {
-                              print("Unknown error");
                               setState(() {
                                 _validate = true;
                                 _errorMessage = 'Email or password cannot be empty';
                               });
                             } else if (e.code == "too-many-requests") {
-                              print("too-many-requests");
                               setState(() {
                                 _validate = true;
                                 _errorMessage = 'Too many requests have been made please try again later';
                               });
                             } else if (e.code == "network-request-failed") {
-                              print('network-request-failed');
                               setState(() {
                                 _validate = true;
                                 _errorMessage = 'Network request failed please try again later';
@@ -184,19 +216,17 @@ class _TeacherLoginAUthState extends State<TeacherLoginAUth> {
                             } 
                           }
                         } else {
-                          print("Not a valid school");
                           setState(() {
                             _validate = true;
                             _errorMessage = 'Please choose a valid school';
-                            er = 'Not a valid school';
                           });
                         }
                       } else {
-                        er = 'No internet connection';
+                        _errorMessage = 'No internet connection';
                         _tryConnection();
                       }
                     },
-                    child: const Text('Enter')
+                    child: const Text('Enter', style: TextStyle(fontSize: 15, fontFamily: 'Lato-bold'))
                     ),
               ],
             ),

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class loginApp12 extends StatefulWidget {
@@ -35,12 +34,7 @@ class _loginApp12State extends State<loginApp12> {
       _connectivitySubscription.cancel();
     }
   
-    Future<void> _checkConnectivityState() async {
-      final ConnectivityResult result = await Connectivity().checkConnectivity();
-      setState(() {
-        _connectivityResult = result;
-      });
-    }
+    
     Future<void> _tryConnection() async {
       try {
         final response = await InternetAddress.lookup('www.google.com');
@@ -63,24 +57,28 @@ class _loginApp12State extends State<loginApp12> {
   Widget build(BuildContext context) {
     _tryConnection();
     return Scaffold(
-      backgroundColor: Color.fromRGBO(8, 65, 92, 1),
+      backgroundColor: const Color.fromRGBO(8, 65, 92, 1),
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Color.fromRGBO(235, 186, 185, 1),
+        backgroundColor: const Color.fromRGBO(235, 186, 185, 1),
         title: const Text("Login", style: TextStyle(fontFamily: 'Lato-bold')),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(_errorMessage, style: TextStyle(color: Colors.red, fontSize: 20.0, fontFamily: 'Lato-bold'), textAlign: TextAlign.center,),
-            SizedBox(height: 20),
+            Text(_errorMessage, style: const TextStyle(color: Colors.red, fontSize: 20.0, fontFamily: 'Lato-bold'), textAlign: TextAlign.center,),
+            const SizedBox(height: 20),
             const Text('Choose your school:', style: TextStyle(fontFamily: 'Lato-bold', fontSize: 25.0, color: Colors.white), textAlign: TextAlign.center,),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             DropdownButton(
-              style: TextStyle(fontFamily: 'Lato-bold', fontSize: 20.0, color: Colors.white),
-              dropdownColor: Color.fromRGBO(56, 134, 151, 1),
+              style: const TextStyle(fontFamily: 'Lato-bold', fontSize: 20.0, color: Colors.white),
+              dropdownColor: const Color.fromRGBO(56, 134, 151, 1),
               value: dropdownvalue,
+              borderRadius: BorderRadius.circular(10),
+              iconSize: 30,
+              iconDisabledColor: Colors.black,
+              iconEnabledColor: const Color.fromRGBO(204, 41, 54, 1),
               icon: const Icon(Icons.keyboard_arrow_down),    
               items: items.map((String items) {
                 return DropdownMenuItem(
@@ -94,8 +92,11 @@ class _loginApp12State extends State<loginApp12> {
                 });
               },
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: const Color.fromARGB(250, 8, 65, 92),
+              ),
               child: const Text('Enter', style: TextStyle(fontFamily: 'Lato-bold', fontSize: 22.0, color: Colors.white)),
               onPressed: () {
                 if (_isConnectionSuccessful == true) {
@@ -111,7 +112,7 @@ class _loginApp12State extends State<loginApp12> {
                 }
               },
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
           ],
         ),
       ),
