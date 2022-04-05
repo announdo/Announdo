@@ -149,7 +149,7 @@ class _ChangeDatabaseState extends State<ChangeDatabase> {
         await Future.delayed(const Duration(seconds: 2));
       },
       child: Scaffold(
-        backgroundColor: const Color.fromRGBO(235, 186, 185, 1),
+        backgroundColor: Colors.white,
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
           centerTitle: true,
@@ -251,7 +251,7 @@ class _ChangeDatabaseState extends State<ChangeDatabase> {
                             padding: const EdgeInsets.all(10.0),
                             maximumSize: const Size.fromWidth(200.0),
                             animationDuration: const Duration(milliseconds: 100),
-                            elevation: 40,
+                            elevation: 3,
                           ),
                           child: const Text('Save', style: TextStyle(fontSize: 15, fontFamily: 'Lato-bold'), textAlign: TextAlign.center,),
                           onPressed: () {
@@ -342,7 +342,7 @@ class _ChangeDatabaseState extends State<ChangeDatabase> {
                             padding: const EdgeInsets.all(10.0),
                             maximumSize: const Size.fromWidth(200.0),
                             animationDuration: const Duration(milliseconds: 100),
-                            elevation: 40,
+                            elevation: 3,
                           ),
                           child: const Text('Save', style: TextStyle(fontSize: 15, fontFamily: 'Lato-bold'), textAlign: TextAlign.center,),
                           onPressed: () {
@@ -433,7 +433,7 @@ class _ChangeDatabaseState extends State<ChangeDatabase> {
                             padding: const EdgeInsets.all(10.0),
                             maximumSize: const Size.fromWidth(200.0),
                             animationDuration: const Duration(milliseconds: 100),
-                            elevation: 40,
+                            elevation: 3,
                           ),
                           child: const Text('Save', style: TextStyle(fontSize: 15, fontFamily: 'Lato-bold'), textAlign: TextAlign.center,),
                           onPressed: () {
@@ -523,7 +523,7 @@ class _ChangeDatabaseState extends State<ChangeDatabase> {
                             padding: const EdgeInsets.all(10.0),
                             maximumSize: const Size.fromWidth(200.0),
                             animationDuration: const Duration(milliseconds: 100),
-                            elevation: 40,
+                            elevation: 3,
                           ),
                           child: const Text('Save', style: TextStyle(fontSize: 15, fontFamily: 'Lato-bold'), textAlign: TextAlign.center,),
                           onPressed: () {
@@ -614,7 +614,7 @@ class _ChangeDatabaseState extends State<ChangeDatabase> {
                             padding: const EdgeInsets.all(10.0),
                             maximumSize: const Size.fromWidth(200.0),
                             animationDuration: const Duration(milliseconds: 100),
-                            elevation: 40,
+                            elevation: 3,
                           ),
                           child: const Text('Save', style: TextStyle(fontSize: 15, fontFamily: 'Lato-bold'), textAlign: TextAlign.center,),
                           onPressed: () {
@@ -653,7 +653,7 @@ class _ChangeDatabaseState extends State<ChangeDatabase> {
                       padding: const EdgeInsets.all(10.0),
                       maximumSize: const Size.fromWidth(200.0),
                       animationDuration: const Duration(milliseconds: 100),
-                      elevation: 40,
+                      elevation: 3,
                     ),
                     child: const Text('logout'),
                     onPressed: () {

@@ -169,7 +169,7 @@ class _TeacherLoginAUthState extends State<TeacherLoginAUth> {
                       padding: const EdgeInsets.all(10.0),
                       maximumSize: const Size.fromWidth(200.0),
                       animationDuration: const Duration(milliseconds: 100),
-                      elevation: 40,
+                      elevation: 3,
                     ),
                     onPressed: () async {
                       if (_isConnectionSuccessful == true) {

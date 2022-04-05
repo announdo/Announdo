@@ -134,7 +134,7 @@ class _thornhill_infState extends State<thornhill_inf> {
         await Future.delayed(const Duration(seconds: 2));
       },
       child: Scaffold(
-        backgroundColor: const Color.fromRGBO(235, 186, 185, 1),
+        backgroundColor: Colors.white,
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
           centerTitle: true,
@@ -294,11 +294,11 @@ class _thornhill_infState extends State<thornhill_inf> {
                     primary: Colors.white,
                     onSurface: Colors.white,
                     shadowColor: Colors.black,
-                    backgroundColor: Colors.black,
+                    backgroundColor: const Color.fromARGB(250, 8, 65, 92),
                     padding: const EdgeInsets.all(10.0),
                     maximumSize: const Size.fromWidth(200.0),
                     animationDuration: const Duration(milliseconds: 100),
-                    elevation: 40,
+                    elevation: 3,
                   ),
                   child: const Align(
                     alignment: Alignment.bottomCenter,

@@ -60,7 +60,7 @@ class _loginApp12State extends State<loginApp12> {
       backgroundColor: const Color.fromRGBO(8, 65, 92, 1),
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: const Color.fromRGBO(235, 186, 185, 1),
+        backgroundColor: const Color.fromRGBO(56, 134, 151, 1),
         title: const Text("Login", style: TextStyle(fontFamily: 'Lato-bold')),
       ),
       body: Center(
@@ -95,7 +95,7 @@ class _loginApp12State extends State<loginApp12> {
             const SizedBox(height: 20),
             TextButton(
               style: TextButton.styleFrom(
-                backgroundColor: const Color.fromARGB(250, 8, 65, 92),
+                backgroundColor: const Color.fromRGBO(56, 134, 151, 1),
               ),
               child: const Text('Enter', style: TextStyle(fontFamily: 'Lato-bold', fontSize: 22.0, color: Colors.white)),
               onPressed: () {
