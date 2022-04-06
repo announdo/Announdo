@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-
 class loginApp12 extends StatefulWidget {
   const loginApp12({ Key? key }) : super(key: key);
 

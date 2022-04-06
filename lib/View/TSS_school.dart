@@ -2,8 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'global.dart' as gl;
-
-
 class thornhill_inf extends StatefulWidget {
   const thornhill_inf({ Key? key }) : super(key: key);
 
