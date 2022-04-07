@@ -14,7 +14,7 @@ void main() async{
     DeviceOrientation.portraitUp,
   ]);
   runApp(MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Announdo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
