@@ -50,6 +50,7 @@ class _loginApp12State extends State<loginApp12> {
     }
   
   String dropdownvalue = 'School';
+  String mesa = "Please enter the password first then click on the send button!";
   String stats = 'None'; 
   var items = ['Thornhill Secondary School', 'Your school is not available yet', 'School'];
   final code = OTP.generateTOTPCodeString(
@@ -111,31 +112,36 @@ class _loginApp12State extends State<loginApp12> {
                   style: const TextStyle(
                     fontSize: 18,
                     fontFamily: 'Lato',
-                    color: const Color.fromRGBO(8, 65, 92, 1),
+                    // color: const Color.fromRGBO(8, 65, 92, 1),
                   ),
                   decoration: InputDecoration(
                     labelText: 'School Password',
-                    errorText: 'Invalid Password',
+                    // errorText: 'Invalid Password',
                     suffixIcon: IconButton(onPressed: () {
-                      Text("The code is: ");
-                     const  TextField(
-                        // controller: _email,
-                        cursorColor: Color.fromRGBO(8, 65, 92, 1),
-                        keyboardType: TextInputType.emailAddress,
-                        enableSuggestions: false,
-                        autocorrect: false,
-                        scrollPadding: EdgeInsets.all(10.0),
-                        maxLines: 1,
-                        enabled: true,
-                        scrollPhysics: BouncingScrollPhysics(),
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'Lato',
-                          color: Color.fromRGBO(8, 65, 92, 1),
-                        ),
-                      );
                     }, icon: const Icon(Icons.send)),
                     // errorText: _validate ? _errorMessage : null,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Text(mesa),
+                const SizedBox(height: 20),
+                TextField(
+                  // controller: _email,
+                  cursorColor: const Color.fromRGBO(8, 65, 92, 1),
+                  keyboardType: TextInputType.emailAddress,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  scrollPadding: const EdgeInsets.all(10.0),
+                  maxLines: 1,
+                  enabled: true,
+                  scrollPhysics: const BouncingScrollPhysics(),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontFamily: 'Lato',
+                    // color: const Color.fromRGBO(8, 65, 92, 1),
+                  ),
+                  decoration: InputDecoration(
+                    labelText: 'Code',
                   ),
                 ),
                 const SizedBox(height: 20),
