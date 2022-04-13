@@ -52,14 +52,11 @@ class _loginApp12State extends State<loginApp12> {
   String dropdownvalue = 'School';
   String stats = 'None'; 
   var items = ['Thornhill Secondary School', 'Your school is not available yet', 'School'];
-
-
+  final code = OTP.generateTOTPCodeString(
+  'ANNONDOTHORNHILL', DateTime.now().millisecondsSinceEpoch, isGoogle:true);
+  final time = OTP.remainingSeconds();
   @override
   Widget build(BuildContext context) {
-      final code = OTP.generateTOTPCodeString(
-      'ANNONDOTHORNHILL', DateTime.now().millisecondsSinceEpoch, isGoogle:true);
-      print(code);
-      print(OTP.remainingSeconds());
     _tryConnection();
     return Scaffold(
       backgroundColor: const Color.fromRGBO(8, 65, 92, 1),
@@ -69,56 +66,101 @@ class _loginApp12State extends State<loginApp12> {
         title: const Text("Login", style: TextStyle(fontFamily: 'Lato-bold')),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(_errorMessage, style: const TextStyle(color: Colors.red, fontSize: 20.0, fontFamily: 'Lato-bold'), textAlign: TextAlign.center,),
-            const SizedBox(height: 20),
-            const Text('Choose your school:', style: TextStyle(fontFamily: 'Lato-bold', fontSize: 25.0, color: Colors.white), textAlign: TextAlign.center,),
-            const SizedBox(height: 20),
-            DropdownButton(
-              style: const TextStyle(fontFamily: 'Lato-bold', fontSize: 20.0, color: Colors.white),
-              dropdownColor: const Color.fromRGBO(56, 134, 151, 1),
-              value: dropdownvalue,
-              borderRadius: BorderRadius.circular(10),
-              iconSize: 30,
-              iconDisabledColor: Colors.black,
-              iconEnabledColor: const Color.fromRGBO(204, 41, 54, 1),
-              icon: const Icon(Icons.keyboard_arrow_down),    
-              items: items.map((String items) {
-                return DropdownMenuItem(
-                  value: items,
-                  child: Text(items),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  dropdownvalue = newValue!;
-                });
-              },
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(32.0),
+          child:
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(_errorMessage, style: const TextStyle(color: Colors.red, fontSize: 20.0, fontFamily: 'Lato-bold'), textAlign: TextAlign.center,),
+                const SizedBox(height: 20),
+                const Text('Choose your school:', style: TextStyle(fontFamily: 'Lato-bold', fontSize: 25.0, color: Colors.white), textAlign: TextAlign.center,),
+                const SizedBox(height: 20),
+                DropdownButton(
+                  style: const TextStyle(fontFamily: 'Lato-bold', fontSize: 20.0, color: Colors.white),
+                  dropdownColor: const Color.fromRGBO(56, 134, 151, 1),
+                  value: dropdownvalue,
+                  borderRadius: BorderRadius.circular(10),
+                  iconSize: 30,
+                  iconDisabledColor: Colors.black,
+                  iconEnabledColor: const Color.fromRGBO(204, 41, 54, 1),
+                  icon: const Icon(Icons.keyboard_arrow_down),    
+                  items: items.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownvalue = newValue!;
+                    });
+                  },
+                ),
+                const SizedBox(height: 20),
+                TextField(
+                  // controller: _email,
+                  cursorColor: const Color.fromRGBO(8, 65, 92, 1),
+                  keyboardType: TextInputType.emailAddress,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  scrollPadding: const EdgeInsets.all(10.0),
+                  maxLines: 1,
+                  enabled: true,
+                  scrollPhysics: const BouncingScrollPhysics(),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontFamily: 'Lato',
+                    color: const Color.fromRGBO(8, 65, 92, 1),
+                  ),
+                  decoration: InputDecoration(
+                    labelText: 'School Password',
+                    errorText: 'Invalid Password',
+                    suffixIcon: IconButton(onPressed: () {
+                      Text("The code is: ");
+                     const  TextField(
+                        // controller: _email,
+                        cursorColor: Color.fromRGBO(8, 65, 92, 1),
+                        keyboardType: TextInputType.emailAddress,
+                        enableSuggestions: false,
+                        autocorrect: false,
+                        scrollPadding: EdgeInsets.all(10.0),
+                        maxLines: 1,
+                        enabled: true,
+                        scrollPhysics: BouncingScrollPhysics(),
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontFamily: 'Lato',
+                          color: Color.fromRGBO(8, 65, 92, 1),
+                        ),
+                      );
+                    }, icon: const Icon(Icons.send)),
+                    // errorText: _validate ? _errorMessage : null,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: const Color.fromRGBO(56, 134, 151, 1),
+                  ),
+                  child: const Text('Enter', style: TextStyle(fontFamily: 'Lato-bold', fontSize: 22.0, color: Colors.white)),
+                  onPressed: () {
+                    if (_isConnectionSuccessful == true) {
+                      _errorMessage = '';
+                      if (dropdownvalue == 'Thornhill Secondary School'){
+                        Navigator.of(context).pushReplacementNamed('/TSS_school');
+                    } else{
+                      _errorMessage = 'School not available yet';
+                    }
+                    } else {
+                      _errorMessage = 'No internet connection';
+                      _tryConnection();
+                    }
+                  },
+                ),
+                const SizedBox(height: 20),
+              ],
             ),
-            const SizedBox(height: 20),
-            TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: const Color.fromRGBO(56, 134, 151, 1),
-              ),
-              child: const Text('Enter', style: TextStyle(fontFamily: 'Lato-bold', fontSize: 22.0, color: Colors.white)),
-              onPressed: () {
-                if (_isConnectionSuccessful == true) {
-                  _errorMessage = '';
-                  if (dropdownvalue == 'Thornhill Secondary School'){
-                    Navigator.of(context).pushReplacementNamed('/TSS_school');
-                } else{
-                  _errorMessage = 'School not available yet';
-                }
-                } else {
-                  _errorMessage = 'No internet connection';
-                  _tryConnection();
-                }
-              },
-            ),
-            const SizedBox(height: 20),
-          ],
         ),
       ),
     );
