@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:otp/otp.dart';
+
 class loginApp12 extends StatefulWidget {
   const loginApp12({ Key? key }) : super(key: key);
 
@@ -32,7 +34,7 @@ class _loginApp12State extends State<loginApp12> {
       super.dispose();
       _connectivitySubscription.cancel();
     }
-  
+
     
     Future<void> _tryConnection() async {
       try {
@@ -54,6 +56,10 @@ class _loginApp12State extends State<loginApp12> {
 
   @override
   Widget build(BuildContext context) {
+      final code = OTP.generateTOTPCodeString(
+      'ANNONDOTHORNHILL', DateTime.now().millisecondsSinceEpoch, isGoogle:true);
+      print(code);
+      print(OTP.remainingSeconds());
     _tryConnection();
     return Scaffold(
       backgroundColor: const Color.fromRGBO(8, 65, 92, 1),
