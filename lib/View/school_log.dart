@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class loginApp12 extends StatefulWidget {
 }
 
 class _loginApp12State extends State<loginApp12> {
+    late final TextEditingController _password;
     String _errorMessage = "";
     ConnectivityResult? _connectivityResult;
     late StreamSubscription _connectivitySubscription;
@@ -20,6 +22,7 @@ class _loginApp12State extends State<loginApp12> {
     @override
     initState() {
       super.initState();
+      _password = TextEditingController();
       _connectivitySubscription = Connectivity().onConnectivityChanged.listen((
           ConnectivityResult result
       ) {
@@ -32,6 +35,7 @@ class _loginApp12State extends State<loginApp12> {
     @override
     dispose() {
       super.dispose();
+      _password.dispose();
       _connectivitySubscription.cancel();
     }
 
@@ -50,14 +54,22 @@ class _loginApp12State extends State<loginApp12> {
     }
   
   String dropdownvalue = 'School';
-  String mesa = "Please enter the password first then click on the send button!";
+  String mesa = "";
   String stats = 'None'; 
   var items = ['Thornhill Secondary School', 'Your school is not available yet', 'School'];
-  final code = OTP.generateTOTPCodeString(
-  'ANNONDOTHORNHILL', DateTime.now().millisecondsSinceEpoch, isGoogle:true);
-  final time = OTP.remainingSeconds();
+  bool sch = false;
   @override
   Widget build(BuildContext context) {
+    if (dropdownvalue == "Thornhill Secondary School") {
+      setState(() {
+        mesa = "Please enter the school password!";
+      });
+      sch = true;
+    } else {
+      sch = false;
+    }
+    String code = OTP.generateTOTPCodeString(
+    'ANNONDOTHORNHILL', DateTime.now().millisecondsSinceEpoch, isGoogle:true, interval: 120, algorithm: Algorithm.SHA256, length: 5);
     _tryConnection();
     return Scaffold(
       backgroundColor: const Color.fromRGBO(8, 65, 92, 1),
@@ -107,7 +119,7 @@ class _loginApp12State extends State<loginApp12> {
                   autocorrect: false,
                   scrollPadding: const EdgeInsets.all(10.0),
                   maxLines: 1,
-                  enabled: true,
+                  enabled: sch,
                   scrollPhysics: const BouncingScrollPhysics(),
                   style: const TextStyle(
                     fontSize: 18,
@@ -118,6 +130,9 @@ class _loginApp12State extends State<loginApp12> {
                     labelText: 'School Password',
                     // errorText: 'Invalid Password',
                     suffixIcon: IconButton(onPressed: () {
+                      setState(() {
+                        mesa = code;
+                      });
                     }, icon: const Icon(Icons.send)),
                     // errorText: _validate ? _errorMessage : null,
                   ),
@@ -126,16 +141,16 @@ class _loginApp12State extends State<loginApp12> {
                 Text(mesa),
                 const SizedBox(height: 20),
                 TextField(
-                  // controller: _email,
-                  cursorColor: const Color.fromRGBO(8, 65, 92, 1),
+                  controller: _password,
+                  cursorColor: Color.fromRGBO(8, 65, 92, 1),
                   keyboardType: TextInputType.emailAddress,
                   enableSuggestions: false,
                   autocorrect: false,
-                  scrollPadding: const EdgeInsets.all(10.0),
+                  scrollPadding: EdgeInsets.all(10.0),
                   maxLines: 1,
-                  enabled: true,
-                  scrollPhysics: const BouncingScrollPhysics(),
-                  style: const TextStyle(
+                  enabled: sch,
+                  scrollPhysics: BouncingScrollPhysics(),
+                  style: TextStyle(
                     fontSize: 18,
                     fontFamily: 'Lato',
                     // color: const Color.fromRGBO(8, 65, 92, 1),
@@ -152,15 +167,20 @@ class _loginApp12State extends State<loginApp12> {
                   child: const Text('Enter', style: TextStyle(fontFamily: 'Lato-bold', fontSize: 22.0, color: Colors.white)),
                   onPressed: () {
                     if (_isConnectionSuccessful == true) {
-                      _errorMessage = '';
-                      if (dropdownvalue == 'Thornhill Secondary School'){
-                        Navigator.of(context).pushReplacementNamed('/TSS_school');
-                    } else{
-                      _errorMessage = 'School not available yet';
-                    }
+                      final password = _password.text;
+                      if (password == code.toString()) {
+                        String _errorMessage = '';
+                        if (dropdownvalue == 'Thornhill Secondary School'){
+                          Navigator.of(context).pushReplacementNamed('/TSS_school');
+                        } else{
+                          _errorMessage = 'School not available yet';
+                        }
+                      } else {
+                        _errorMessage = 'No internet connection';
+                        _tryConnection();
+                      }
                     } else {
-                      _errorMessage = 'No internet connection';
-                      _tryConnection();
+                      _errorMessage = 'Wrong code try again!';
                     }
                   },
                 ),
