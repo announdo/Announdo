@@ -138,7 +138,7 @@ class _loginApp12State extends State<loginApp12> {
                   style: const TextStyle(
                     fontSize: 18,
                     fontFamily: 'Lato',
-                    color: const Color.fromRGBO(8, 65, 92, 1),
+                    // color: const Color.fromRGBO(8, 65, 92, 1),
                   ),
                   decoration: InputDecoration(
                     labelText: 'Code',
