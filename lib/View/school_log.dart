@@ -14,6 +14,7 @@ class loginApp12 extends StatefulWidget {
 
 class _loginApp12State extends State<loginApp12> {
     late final TextEditingController _password;
+    late final TextEditingController _school;
     String _errorMessage = "";
     ConnectivityResult? _connectivityResult;
     late StreamSubscription _connectivitySubscription;
@@ -23,6 +24,7 @@ class _loginApp12State extends State<loginApp12> {
     initState() {
       super.initState();
       _password = TextEditingController();
+      _school = TextEditingController();
       _connectivitySubscription = Connectivity().onConnectivityChanged.listen((
           ConnectivityResult result
       ) {
@@ -36,6 +38,7 @@ class _loginApp12State extends State<loginApp12> {
     dispose() {
       super.dispose();
       _password.dispose();
+      _school.dispose();
       _connectivitySubscription.cancel();
     }
 
@@ -58,12 +61,10 @@ class _loginApp12State extends State<loginApp12> {
   String stats = 'None'; 
   var items = ['Thornhill Secondary School', 'Your school is not available yet', 'School'];
   bool sch = false;
+  Color k = Colors.white;
   @override
   Widget build(BuildContext context) {
     if (dropdownvalue == "Thornhill Secondary School") {
-      setState(() {
-        mesa = "Please enter the school password!";
-      });
       sch = true;
     } else {
       sch = false;
@@ -111,53 +112,79 @@ class _loginApp12State extends State<loginApp12> {
                   },
                 ),
                 const SizedBox(height: 20),
-                TextField(
-                  // controller: _email,
-                  cursorColor: const Color.fromRGBO(8, 65, 92, 1),
-                  keyboardType: TextInputType.emailAddress,
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  scrollPadding: const EdgeInsets.all(10.0),
-                  maxLines: 1,
-                  enabled: sch,
-                  scrollPhysics: const BouncingScrollPhysics(),
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontFamily: 'Lato',
-                    // color: const Color.fromRGBO(8, 65, 92, 1),
-                  ),
-                  decoration: InputDecoration(
-                    labelText: 'School Password',
-                    // errorText: 'Invalid Password',
-                    suffixIcon: IconButton(onPressed: () {
-                      setState(() {
-                        mesa = code;
-                      });
-                    }, icon: const Icon(Icons.send)),
-                    // errorText: _validate ? _errorMessage : null,
+                Container (
+                  width: 300,
+                  child: TextField(
+                    controller: _school,
+                    cursorColor: Colors.white,
+                    keyboardType: TextInputType.text,
+                    enableSuggestions: false,
+                    textCapitalization: TextCapitalization.characters,
+                    autocorrect: false,
+                    scrollPadding: const EdgeInsets.all(10.0),
+                    maxLines: 1,
+                    enabled: sch,
+                    scrollPhysics: const BouncingScrollPhysics(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontFamily: 'Lato',
+                    ),
+                    decoration: InputDecoration(
+                      labelText: 'School Password',
+                      suffixIconColor: Colors.white,
+                      labelStyle: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontFamily: 'Lato',
+                      ),
+                      // errorText: 'Invalid Password',
+                      suffixIcon: IconButton(onPressed: () {
+                        if (_school.text == "ANNONDOTHORNHILL") {
+                          setState(() {
+                            mesa = code;
+                            k = Colors.white;
+                        });
+                        } else {
+                          setState(() {
+                            mesa = "Wrong Password";
+                            k = Colors.red;
+                        });
+                        }
+                        
+                      }, icon: const Icon(Icons.send, color: Color.fromARGB(255, 202, 202, 202),),),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),
-                Text(mesa),
-                const SizedBox(height: 20),
-                TextField(
+                Text(mesa, style: TextStyle(fontFamily: 'Lato-bold', fontSize: 18.0, color: k), textAlign: TextAlign.center),
+                const SizedBox(height: 5),
+                Container (
+                  width: 300,
+                  child: TextField(
                   controller: _password,
                   cursorColor: Color.fromRGBO(8, 65, 92, 1),
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.numberWithOptions(),
                   enableSuggestions: false,
                   autocorrect: false,
                   scrollPadding: EdgeInsets.all(10.0),
                   maxLines: 1,
                   enabled: sch,
                   scrollPhysics: BouncingScrollPhysics(),
-                  style: TextStyle(
+                  style: const TextStyle(
+                    color: Colors.white,
                     fontSize: 18,
                     fontFamily: 'Lato',
-                    // color: const Color.fromRGBO(8, 65, 92, 1),
                   ),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Code',
+                    labelStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontFamily: 'Lato',
+                    ),
                   ),
+                ),
                 ),
                 const SizedBox(height: 20),
                 TextButton(
@@ -176,11 +203,11 @@ class _loginApp12State extends State<loginApp12> {
                           _errorMessage = 'School not available yet';
                         }
                       } else {
-                        _errorMessage = 'No internet connection';
-                        _tryConnection();
+                        _errorMessage = 'Wrong code try again!';
                       }
                     } else {
-                      _errorMessage = 'Wrong code try again!';
+                      _errorMessage = 'No internet connection';
+                      _tryConnection();
                     }
                   },
                 ),
