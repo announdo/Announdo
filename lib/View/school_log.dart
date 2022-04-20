@@ -4,7 +4,8 @@ import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:otp/otp.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'global.dart' as gl;
 class loginApp12 extends StatefulWidget {
   const loginApp12({ Key? key }) : super(key: key);
 
@@ -62,6 +63,7 @@ class _loginApp12State extends State<loginApp12> {
   var items = ['Thornhill Secondary School', 'Your school is not available yet', 'School'];
   bool sch = false;
   Color k = Colors.white;
+  
   @override
   Widget build(BuildContext context) {
     if (dropdownvalue == "Thornhill Secondary School") {
@@ -192,13 +194,16 @@ class _loginApp12State extends State<loginApp12> {
                     backgroundColor: const Color.fromRGBO(56, 134, 151, 1),
                   ),
                   child: const Text('Enter', style: TextStyle(fontFamily: 'Lato-bold', fontSize: 22.0, color: Colors.white)),
-                  onPressed: () {
+                  onPressed: () async{
                     if (_isConnectionSuccessful == true) {
+                      final prefs = await SharedPreferences.getInstance();
                       final password = _password.text;
                       if (password == code.toString()) {
                         String _errorMessage = '';
                         if (dropdownvalue == 'Thornhill Secondary School'){
                           Navigator.of(context).pushReplacementNamed('/TSS_school');
+                          gl.veri = 1;
+                          prefs.setInt('verified', gl.veri);
                         } else{
                           _errorMessage = 'School not available yet';
                         }

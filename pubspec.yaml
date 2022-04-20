@@ -43,6 +43,7 @@ dependencies:
   flutter_launcher_icons: ^0.9.2
   http: ^0.13.4
   otp: ^3.0.2
+  shared_preferences: ^2.0.13
 
 flutter_icons:
   android: true

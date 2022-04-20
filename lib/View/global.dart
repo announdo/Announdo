@@ -8,5 +8,4 @@ String thurTittle = "";
 String thurDes = "";
 String friTittle = "";
 String friDes = "";
-
-
+int veri = 0;

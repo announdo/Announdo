@@ -1,5 +1,7 @@
+import 'package:announdo/View/TSS_school.dart';
 import 'package:announdo/View/school_log.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class SplashScreen extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -14,10 +16,19 @@ class _SplashScreen extends State<SplashScreen>{
   @override
   void initState() {
     Future.delayed(Duration(seconds: splashtime), () async {
-        Navigator.pushReplacement(context, MaterialPageRoute(
+        final prefs = await SharedPreferences.getInstance();
+        final v = prefs.getInt('verified');
+        if (v == 1) {
+          Navigator.pushReplacement(context, MaterialPageRoute(
           builder: (context){
-              return const loginApp12();       
+          return const thornhill_inf();       
         }));
+        } else {
+          Navigator.pushReplacement(context, MaterialPageRoute(
+          builder: (context){
+          return const loginApp12();       
+        }));
+        }
     }); 
 
     super.initState();
