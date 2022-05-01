@@ -17,7 +17,7 @@ void main() async{
       title: 'Announdo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-      ),
+      )
       home: SplashScreen(),
       routes: {
         '/school_log': (context) => const loginApp12(),
