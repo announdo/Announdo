@@ -17,7 +17,7 @@ Only teachers can change the announcements and they are predetermined.
 
 
 <img src="https://www.svgrepo.com/show/303139/google-play-badge-logo.svg" width="15%" height="10%" href="https://play.google.com/store/apps/details?id=com.announdo.announdo">
-<img src="https://www.svgrepo.com/show/303128/download-on-the-app-store-apple-logo.svg" width="15%" height="10%" href="https://apps.apple.com/us/app/annondo/id1623010127">
+<a><img src="https://www.svgrepo.com/show/303128/download-on-the-app-store-apple-logo.svg" width="15%" height="10%" href="https://apps.apple.com/us/app/annondo/id1623010127"></a>
 
 ## Demo:
 
