@@ -141,52 +141,22 @@ class _loginApp12State extends State<loginApp12> {
                         fontFamily: 'Lato',
                       ),
                       // errorText: 'Invalid Password',
-                      suffixIcon: IconButton(onPressed: () {
-                        if (_school.text == "ANNONDOTHORNHILL") {
-                          setState(() {
-                            mesa = code;
-                            k = Colors.white;
-                        });
-                        } else {
-                          setState(() {
-                            mesa = "Wrong Password";
-                            k = Colors.red;
-                        });
-                        }
+                      // suffixIcon: IconButton(onPressed: () {
+                      //   if (_school.text == "ANNONDOTHORNHILL") {
+                      //     setState(() {
+                      //       mesa = code;
+                      //       k = Colors.white;
+                      //   });
+                      //   } else {
+                      //     setState(() {
+                      //       mesa = "Wrong Password";
+                      //       k = Colors.red;
+                      //   });
+                      //   }
 
-                      }, icon: const Icon(Icons.send, color: Color.fromARGB(255, 202, 202, 202),),),
+                      // }, icon: const Icon(Icons.send, color: Color.fromARGB(255, 202, 202, 202),),),
                     ),
                   ),
-                ),
-                const SizedBox(height: 20),
-                Text(mesa, style: TextStyle(fontFamily: 'Lato-bold', fontSize: 18.0, color: k), textAlign: TextAlign.center),
-                const SizedBox(height: 5),
-                Container (
-                  width: 300,
-                  child: TextField(
-                  controller: _password,
-                  cursorColor: Color.fromRGBO(8, 65, 92, 1),
-                  keyboardType: TextInputType.numberWithOptions(),
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  scrollPadding: EdgeInsets.all(10.0),
-                  maxLines: 1,
-                  enabled: sch,
-                  scrollPhysics: BouncingScrollPhysics(),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontFamily: 'Lato',
-                  ),
-                  decoration: const InputDecoration(
-                    labelText: 'Code',
-                    labelStyle: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontFamily: 'Lato',
-                    ),
-                  ),
-                ),
                 ),
                 const SizedBox(height: 20),
                 TextButton(
@@ -198,7 +168,7 @@ class _loginApp12State extends State<loginApp12> {
                     if (_isConnectionSuccessful == true) {
                       final prefs = await SharedPreferences.getInstance();
                       final password = _password.text;
-                      if (password == code.toString()) {
+                      if (_school.text == "ANNONDOTHORNHILL") {
                         String _errorMessage = '';
                         if (dropdownvalue == 'Thornhill Secondary School'){
                           Navigator.of(context).pushReplacementNamed('/TSS_school');
@@ -208,7 +178,7 @@ class _loginApp12State extends State<loginApp12> {
                           _errorMessage = 'School not available yet';
                         }
                       } else {
-                        _errorMessage = 'Wrong code try again!';
+                        _errorMessage = 'Wrong school code try again!';
                       }
                     } else {
                       _errorMessage = 'No internet connection';
