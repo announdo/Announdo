@@ -10,7 +10,7 @@ class SplashScreen extends StatefulWidget{
 }
 
 class _SplashScreen extends State<SplashScreen>{
-  final int splashtime = 5; 
+  final int splashtime = 5;
   // duration of splash screen on second
 
   @override
@@ -21,15 +21,15 @@ class _SplashScreen extends State<SplashScreen>{
         if (v == 1) {
           Navigator.pushReplacement(context, MaterialPageRoute(
           builder: (context){
-          return const thornhill_inf();       
+          return const thornhill_inf();
         }));
         } else {
           Navigator.pushReplacement(context, MaterialPageRoute(
           builder: (context){
-          return const loginApp12();       
+          return const loginApp12();
         }));
         }
-    }); 
+    });
 
     super.initState();
   }
@@ -39,7 +39,7 @@ class _SplashScreen extends State<SplashScreen>{
       return Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/announdo.png"),
+            image: AssetImage("assets/new_announdo.gif"),
             fit: BoxFit.cover,
           ),
         ),

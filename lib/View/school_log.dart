@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ffi';
 import 'dart:io';
+import 'dart:ui';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:otp/otp.dart';
@@ -162,8 +163,12 @@ class _loginApp12State extends State<loginApp12> {
                 TextButton(
                   style: TextButton.styleFrom(
                     backgroundColor: const Color.fromRGBO(46, 147, 60, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: const EdgeInsets.all(10.0),
                   ),
-                  child: const Text('Enter', style: TextStyle(fontFamily: 'Lato-bold', fontSize: 22.0, color: Colors.white)),
+                  child: const Text('Enter', style: TextStyle(fontFamily: 'Lato-bold', fontSize: 25.0, color: Colors.white)),
                   onPressed: () async{
                     if (_isConnectionSuccessful == true) {
                       final prefs = await SharedPreferences.getInstance();
