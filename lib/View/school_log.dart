@@ -62,7 +62,7 @@ class _loginApp12State extends State<loginApp12> {
   String stats = 'None';
   var items = ['Thornhill Secondary School', 'Your school is not available yet'];
   bool sch = false;
-  Color k = Colors.white;
+  // Color k = Colors.black;
 
   @override
   Widget build(BuildContext context) {
@@ -71,14 +71,14 @@ class _loginApp12State extends State<loginApp12> {
     } else {
       sch = false;
     }
-    String code = OTP.generateTOTPCodeString(
-    'ANNONDOTHORNHILL', DateTime.now().millisecondsSinceEpoch, isGoogle:true, interval: 120, algorithm: Algorithm.SHA256, length: 5);
+    // String code = OTP.generateTOTPCodeString(
+    // 'ANNONDOTHORNHILL', DateTime.now().millisecondsSinceEpoch, isGoogle:true, interval: 120, algorithm: Algorithm.SHA256, length: 5);
     _tryConnection();
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(8, 65, 92, 1),
+      backgroundColor: const Color.fromRGBO(32, 78, 74, 1),
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: const Color.fromRGBO(56, 134, 151, 1),
+        backgroundColor: const Color.fromRGBO(247, 198, 71, 1),
         title: const Text("Login", style: TextStyle(fontFamily: 'Lato-bold')),
       ),
       body: Center(
@@ -94,12 +94,12 @@ class _loginApp12State extends State<loginApp12> {
                 const SizedBox(height: 20),
                 DropdownButton(
                   style: const TextStyle(fontFamily: 'Lato-bold', fontSize: 20.0, color: Colors.white),
-                  dropdownColor: const Color.fromRGBO(56, 134, 151, 1),
+                  dropdownColor: const Color.fromRGBO(46, 147, 60, 1),
                   value: dropdownvalue,
                   borderRadius: BorderRadius.circular(10),
                   iconSize: 30,
                   iconDisabledColor: Colors.black,
-                  iconEnabledColor: const Color.fromRGBO(204, 41, 54, 1),
+                  iconEnabledColor: const Color.fromRGBO(46, 147, 60, 1),
                   icon: const Icon(Icons.keyboard_arrow_down),
                   items: items.map((String items) {
                     return DropdownMenuItem(
@@ -161,7 +161,7 @@ class _loginApp12State extends State<loginApp12> {
                 const SizedBox(height: 20),
                 TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor: const Color.fromRGBO(56, 134, 151, 1),
+                    backgroundColor: const Color.fromRGBO(46, 147, 60, 1),
                   ),
                   child: const Text('Enter', style: TextStyle(fontFamily: 'Lato-bold', fontSize: 22.0, color: Colors.white)),
                   onPressed: () async{
