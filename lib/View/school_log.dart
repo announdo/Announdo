@@ -34,7 +34,7 @@ class _loginApp12State extends State<loginApp12> {
         });
       });
     }
-  
+
     @override
     dispose() {
       super.dispose();
@@ -43,7 +43,7 @@ class _loginApp12State extends State<loginApp12> {
       _connectivitySubscription.cancel();
     }
 
-    
+
     Future<void> _tryConnection() async {
       try {
         final response = await InternetAddress.lookup('www.google.com');
@@ -56,14 +56,14 @@ class _loginApp12State extends State<loginApp12> {
         });
       }
     }
-  
-  String dropdownvalue = 'School';
+
+  String dropdownvalue = 'Thornhill Secondary School';
   String mesa = "";
-  String stats = 'None'; 
-  var items = ['Thornhill Secondary School', 'Your school is not available yet', 'School'];
+  String stats = 'None';
+  var items = ['Thornhill Secondary School', 'Your school is not available yet'];
   bool sch = false;
   Color k = Colors.white;
-  
+
   @override
   Widget build(BuildContext context) {
     if (dropdownvalue == "Thornhill Secondary School") {
@@ -100,7 +100,7 @@ class _loginApp12State extends State<loginApp12> {
                   iconSize: 30,
                   iconDisabledColor: Colors.black,
                   iconEnabledColor: const Color.fromRGBO(204, 41, 54, 1),
-                  icon: const Icon(Icons.keyboard_arrow_down),    
+                  icon: const Icon(Icons.keyboard_arrow_down),
                   items: items.map((String items) {
                     return DropdownMenuItem(
                       value: items,
@@ -153,7 +153,7 @@ class _loginApp12State extends State<loginApp12> {
                             k = Colors.red;
                         });
                         }
-                        
+
                       }, icon: const Icon(Icons.send, color: Color.fromARGB(255, 202, 202, 202),),),
                     ),
                   ),
