@@ -24,8 +24,36 @@ Only teachers can change the announcements and they are predetermined.
 
 https://user-images.githubusercontent.com/68626539/167960448-b966af8e-a30f-40b6-85ca-c2db49590d6f.mp4
 
+# Security, boring but required.
 
+## How auth works:
+
+A ticket is created by a trusted user via the app. The following info is stored onto firebase: (if the ticket is deleted, then users that used the ticket to login will be denied access)
+
+Code Phrase, Token (unique), Phrase Expiry Date, Token Expiry Date, Type (auth)
+
+Users are able to request the Auth Token given the code phrase, Firebase will check the expiry date. (Note: The token will NOT expire after this date)
+
+This token is stored on the client, and is used in every authenticated request.
+
+Trusted users can login with their email and password, which is created on the Firebase console.
+
+## How announcement submission works
+
+A ticket is created by a trusted user via the app. The following info is stored onto firebase:
+
+Code Phrase, Type (submission), Submitter Alias
+
+The code phrase is then shared to a student/staff who is designated to submit announcements to the app.
+
+When submitting an announcement, firebase checks the phrase against the list of tickets.
+
+Submission record:
+
+Title, Description, Start Time, End Time, Priority, Is Draft (true), Submitter Alias, Priority (0)
+
+The submission may be approved by a trusted user, and the draft status can be set to false, and they may give a priority to the post.
 
 ## Created by who???!
 
-Created By AlPHA With ❤️
+Created By AlPHA & encodeous With ❤️
