@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/tickets/documents {
+    function matchesPhrase(){
+        return request.query.limit <= 1 && request.query.codePhrase == resource.data.codePhrase && request.query.type == "auth";
+    }
+    function trusted(){
+        return request.auth != null;
+    }
+    function phraseValid(){
+        return request.time <= resource.data.phraseExpiry;
+    }
+  	match /{document=**} {
+      allow read : if matchesPhrase() && phraseValid() || trusted();
+    }
+  }
+}
