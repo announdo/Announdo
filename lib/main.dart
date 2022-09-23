@@ -1,5 +1,6 @@
 import 'package:announdo/View/splashScreen.dart';
 import 'package:announdo/backend/auth.dart';
+import 'package:announdo/backend/posts.dart';
 import 'package:announdo/backend/tickets.dart';
 import 'package:announdo/firebase_options.dart';
 import 'package:announdo/views/login.dart';
@@ -19,13 +20,14 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseFirestore.instance.settings = const Settings(
-    host: '192.168.12.12:8080',
-    sslEnabled: false,
-    persistenceEnabled: false,
-  );
-  FirebaseAuth.instance.useAuthEmulator("192.168.12.12", 9099);
+  // FirebaseFirestore.instance.settings = const Settings(
+  //   host: '192.168.12.12:8080',
+  //   sslEnabled: false,
+  //   persistenceEnabled: false,
+  // );
+  // FirebaseAuth.instance.useAuthEmulator("192.168.12.12", 9099);
   Tickets.initialize();
+  Posts.initialize();
   await Auth.isLoggedIn();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

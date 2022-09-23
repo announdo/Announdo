@@ -1,26 +1,29 @@
+import 'dart:convert';
 import 'dart:developer';
+import 'package:http/http.dart' as http;
 
-import 'package:announdo/model/auth_ticket.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Tickets {
   static late FirebaseFirestore _db;
+  static const String apiEndpoint = "https://auth.encodeous.cc";
   static void initialize(){
     _db = FirebaseFirestore.instance;
   }
 
-  static Future<AuthToken?> getAuthToken(String phrase) async {
-    var ticketRef = _db.collection("tickets").doc(phrase);
-    try{
-      var res = await ticketRef.get();
-      var token = await _db.collection("tokens")
-          .doc(res['token']).get();
-      if(token['type'] != 'auth') return null;
-      return AuthToken(token['expiry'], res['token']);
-    }
-    catch(e){
-      log(e.toString());
-      return null;
+  static Future<String?> getAuthToken(String phrase) async {
+    var url = "$apiEndpoint/auth/login";
+
+    Map<String,String> headers = {
+      'Content-type' : 'application/json',
+      'Accept': 'text/plain',
+    };
+    var response = await http.post(Uri.parse(url), body: "\"$phrase\"", headers: headers);
+
+    if(response.statusCode == 200){
+      return response.body;
+    }else{
+       return null;
     }
   }
   /// Returns true if the auth ticket was made, otherwise the phrase already exists
