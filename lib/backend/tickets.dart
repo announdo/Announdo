@@ -13,12 +13,13 @@ class Tickets {
 
   static Future<String?> getAuthToken(String phrase) async {
     var url = "$apiEndpoint/auth/login";
+    var body = json.encode(phrase);
 
     Map<String,String> headers = {
       'Content-type' : 'application/json',
       'Accept': 'text/plain',
     };
-    var response = await http.post(Uri.parse(url), body: "\"$phrase\"", headers: headers);
+    var response = await http.post(Uri.parse(url), body: body, headers: headers);
 
     if(response.statusCode == 200){
       return response.body;

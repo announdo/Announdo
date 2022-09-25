@@ -3,7 +3,8 @@ import 'package:announdo/backend/auth.dart';
 import 'package:announdo/backend/posts.dart';
 import 'package:announdo/backend/tickets.dart';
 import 'package:announdo/firebase_options.dart';
-import 'package:announdo/views/login.dart';
+import 'package:announdo/views/admin/admin_home.dart';
+import 'package:announdo/views/login/login.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -13,7 +14,7 @@ import 'View/TSS_school.dart';
 import 'View/school_log.dart';
 import 'View/teacher_Change.dart';
 import 'View/teacher_Login.dart';
-import 'views/home.dart';
+import 'views/home/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,6 +52,7 @@ void main() async {
       home: const Home(),
       routes: {
         '/login': (context) => const Login(),
+        '/admin': (context) => const AdminHome(),
         '/school_log': (context) => const loginApp12(),
         '/TSS_school': (context) => const thornhill_inf(),
         '/teachersAuth': (context) => const TeacherLoginAUth(),

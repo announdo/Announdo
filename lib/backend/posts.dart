@@ -10,4 +10,6 @@ class Posts {
   static Query<Map<String, dynamic>> buildQuery() {
     return _db.collection("posts");
   }
+
+
 }

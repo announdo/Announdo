@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 
 class Auth {
-  static String? token;
   static Future<bool> isLoggedIn() async {
     if(FirebaseAuth.instance.currentUser == null) return false;
     if((await getAuthExpiry()).compareTo(DateTime.now().toUtc()) <= 0){
@@ -23,6 +22,9 @@ class Auth {
       return DateTime.fromMillisecondsSinceEpoch(expiry * 1000, isUtc: true);
     }
     return DateTime.utc(275760,09,13);
+  }
+  static bool isAdmin(){
+    return !FirebaseAuth.instance.currentUser!.uid.startsWith("tok-");
   }
   static Future<bool> login(String phrase) async {
     try{
