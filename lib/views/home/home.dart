@@ -54,7 +54,7 @@ class _HomeState extends State<Home> {
                     value: 2,
                     child: Text("Settings"),
                   ),
-                  if(Auth.isAdmin())
+                  // if(Auth.isAdmin())
                     const PopupMenuItem<int>(
                       value: 3,
                       child: Text("Admin"),
